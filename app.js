@@ -1,13 +1,26 @@
 "use strict";
 
-let user = {
-    name:"jhon",
-    years:30
-};
+function sum(a) {
 
-let {name,years:age,isAdmin=false} = user;
+    return function(b) {
+      return a + b; 
+    };
+  
+  }
+  
+  
+  console.log(sum(5)(-1));
+  
+
+  
+  
+function byField(field) {
+    return (a, b) => a[field] > b[field] ? 1 : -1;
+  }
+  
+  users.sort(byField('name'));
+users.forEach(user => console.log(user.name));
 
 
-console.log(name);
-console.log(age);
-console.log(isAdmin);
+users.sort(byField('age'));
+users.forEach(user => console.log(user.name));

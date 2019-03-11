@@ -1,51 +1,42 @@
 let assert = require('chai').assert;
 
-function sequenceSum (begin, end, step) {
-  let array = [];
-
-  for (let i = begin; i <= end; i += step) {
-    array.push(i);
-  }
-
-  let result = array.reduce((a, b) => a + b);
-
-  if (array[begin] > array[end]) {
-    return 0;
-  } else if (array[begin] <= 0) {
-    return -1;
-  } else {
-    return result;
-  }
+function inArray(arr) {
+  return function(x) {
+    return arr.includes(x);
+  };
 }
 
-describe('sequenceSum ', function () {
-  it(' returns the sum of a sequence of 2,2,2 ', function () {
-    sequenceSum(2, 2, 2);
-    assert.strictEqual(sequenceSum(2, 2, 2), 2);
-  });
-  it('return the sum of a sequence of 2,6,2', function () {
-    sequenceSum(2, 6, 2);
-    assert.deepEqual(sequenceSum(2, 6, 2), 12);
-  });
-  it('return the sum of sequence of 1,5,1', function () {
-    sequenceSum(1, 5, 1);
-    assert.deepEqual(sequenceSum(1, 5, 1), 15);
-  });
-  it('return the sum of sequence of 1,5,3', function () {
-    sequenceSum(1, 5, 3);
-    assert.deepEqual(sequenceSum(1, 5, 3), 5);
+
+
+function inBetween(a, b) {
+  return function(x) {
+    return x >= a && x <= b;
+  };
+}
+
+
+
+
+
+describe("inArray", function() {
+  let arr = [1, 2, 3, 4, 5, 6, 7];
+
+  it("returns the filter for values in array", function() {
+
+    let filter = inArray([1,2,10]);
+    assert.isTrue(filter(2));
+    assert.isFalse(filter(0));
   });
 });
 
-function reverseLetter (str) {
-  let arr = str.split('');
-  let result = arr.reverse();
-  return result.join('');
-}
 
-describe('reverseLetter', function () {
-  it('return the reverse string', function () {
-    reverseLetter('krishan');
-    assert.deepEqual(reverseLetter('krishan'), 'nahsirk');
+describe("inBetween", function() {
+
+  it("returns the filter for values between", function() {
+    let filter = inBetween(3, 6);
+    assert.isTrue(filter(5));
+    assert.isFalse(filter(0));
   });
 });
+
+
